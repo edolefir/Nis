@@ -1,0 +1,16 @@
+<b>Dear __Name__,</b>
+<br/><br/>
+Due to a technical error you may have received an invitation containing wrong title of your paper. We are sorry for any inconvenience caused by this.
+<br/><br/>
+Please find attached invitation confirming the acceptance of your abstract entitled "__Title__".
+<br/><br/>
+In order to present your work, you are cordially invited to join us at the ICPNS’2019 on Oct. 10-14, 2019, Moscow and St. Petersburg, Russia.
+<br/><br/>
+Please note that the early bird registration fee have to be paid before June 20. The payment can be performed online or by Bank transfer, please find the details in payment instructions posted on our website: https://icpns2019.hse.ru/fees/
+<br/><br/>
+Best regards and looking forward to see you in Moscow!
+<br/><br/>
+Organizing committee of ICPNS’2019
+<br/>
+e-mail: icpns2019@hse.ru<br/>
+web: https://icpns2019.hse.ru

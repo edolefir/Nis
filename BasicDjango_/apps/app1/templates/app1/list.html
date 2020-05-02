@@ -1,0 +1,44 @@
+﻿{% extends 'base.html' %}
+
+{% block content%}
+  <form action = "" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+<div class="SenderForm">
+    {{ form.LOGIN.errors}}
+    <label for="{{ form.LOGIN.id_for_label}}">Email:</label>
+    {{ form.LOGIN }}
+</div>
+<div class="SenderForm">
+    {{ form.PWD.errors}}
+    <label for="{{ form.PWD.id_for_label}}">Пароль:</label>
+    {{ form.PWD }}
+</div>
+<div class="SenderForm">
+    {{ form.WHOM.errors}}
+    <label for="{{ form.WHOM.id_for_label}}">Файл в формате .xlsx:</label>
+    {{ form.WHOM }}
+</div>
+<div class="SenderForm">
+    {{ form.ATTACH_TPL.errors}}
+    <label for="{{ form.ATTACH_TPL.id_for_label}}">Файл в формате .docx:</label>
+    {{ form.ATTACH_TPL }}
+</div>
+<div class="SenderForm">
+    {{ form.THEME.errors}}
+    <label for="{{ form.THEME.id_for_label}}">Тема:</label>
+    {{ form.THEME }}
+</div>
+<div class="SenderForm">
+    {{ form.LETTER.errors}}
+    <label for="{{ form.LETTER.id_for_label}}">Письмо:</label>
+    {{ form.LETTER }}
+</div>
+   <button name = "submit" type="submit" value="Sended">Отправить</button>
+  </form>
+
+{% if submitbutton == "Sended" %}
+<h1>Сообщение отправлено!</h1>
+
+{% endif %}
+{% endblock%}
