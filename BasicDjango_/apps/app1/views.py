@@ -37,20 +37,8 @@ def sender(request):
             MAIL_SERVER = 'smtp.gmail.com:587'
             worksheet = pandas.read_excel(request.FILES['WHOM'], sheet_name=0)
             Keys= CreateKeys(worksheet)
-            if 'ATTACH_TPL' in request.FILES:
-                attachment = changeName(request.FILES['ATTACH_TPL'].name)
-                if attachment.find('doc') > 0:
-                    attachFile = MIMEBase('application', 'msword')
-                elif attachment.find('pdf') > 0:
-                    attachFile = MIMEBase('application', 'pdf')
-                else:
-                    attachFile = MIMEBase('application', 'octet-stream')
-                    
-                attachFile.set_payload(request.FILES['ATTACH_TPL'].read())
-                encoders.encode_base64(attachFile)
-                attachFile.add_header('Content-Disposition', 'attachment', filename=attachment)
-            if 'ATTACH_TPL' in request.FILES:
-                tpl = DocxTemplate(request.FILES['ATTACH_TPL'])
+            
+                
             for i in worksheet.index:
                 msg = MIMEMultipart()
                 msg['From'] = LOGIN
@@ -58,10 +46,26 @@ def sender(request):
                 msg['Subject'] = THEME
                 Text = MESSAGE
                 for param in Keys:
-                    Text=Text.replace('__' + param + '__',worksheet[param][i])
+                    Text=Text.replace('{{ ' + param + ' }}',worksheet[param][i])
                 msg.attach(MIMEText(Text))
-
                 if 'ATTACH_TPL' in request.FILES:
+                    tpl = DocxTemplate(request.FILES['ATTACH_TPL'])
+                    context2 = {param : worksheet[param][i] for param in Keys}
+                    tpl.render(context2)
+                    tpl.save('Indvitation2.docx')
+                    attachment = 'Indvitation2.docx'
+                    if attachment.find('doc') > 0:
+                        attachFile = MIMEBase('application', 'msword')
+                    elif attachment.find('pdf') > 0:
+                        attachFile = MIMEBase('application', 'pdf')
+                    else:
+                        attachFile = MIMEBase('application', 'octet-stream')
+                    
+                    fo = open('Indvitation2.docx', 'rb')
+                    attachFile.set_payload(fo.read())
+                    fo.close()
+                    encoders.encode_base64(attachFile)
+                    attachFile.add_header('Content-Disposition', 'attachment', filename=attachment)
                     msg.attach(attachFile)
 
                 server = smtplib.SMTP(MAIL_SERVER)  
