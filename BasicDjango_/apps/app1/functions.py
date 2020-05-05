@@ -4,5 +4,12 @@ def changeName(name):
 
 import pandas
 
-def CreateKeys(data):
-	 return data.columns
+def CreateDict(data):
+	Keys = data.columns
+	for i in data.index:
+		if pandas.isnull(data['Email'][i]) == False:
+
+			for key in Keys:
+				if pandas.isnull(data[key][i]):
+
+		

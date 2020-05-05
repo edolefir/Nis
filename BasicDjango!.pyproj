@@ -57,7 +57,8 @@
   <ItemGroup>
     <Content Include="BasicDjango_\apps\app1\templates\app1\list.html" />
     <Content Include="BasicDjango_\apps\app1\templates\base.html" />
-    <Content Include="BasicDjango_\apps\app1\emails.xlsx" />
+    <Content Include="Tests\Doc.docx" />
+    <Content Include="Tests\emails.xlsx" />
     <Content Include="letter4.txt" />
     <Content Include="senderV3.py" />
     <Content Include="requirements.txt" />
@@ -69,6 +70,7 @@
     <Folder Include="BasicDjango_\apps\app1\migrations\" />
     <Folder Include="BasicDjango_\apps\app1\templates\" />
     <Folder Include="BasicDjango_\apps\app1\templates\app1\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
