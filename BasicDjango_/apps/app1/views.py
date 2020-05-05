@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
 import pandas
@@ -11,7 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email import encoders
 from .functions import changeName
-from .functions import CreateKeys
+from .functions import CreateData
 from .forms import SenderForm
 import xlrd
 import time
@@ -36,22 +35,19 @@ def sender(request):
             THEME = form.cleaned_data.get('THEME')
             MAIL_SERVER = 'smtp.gmail.com:587'
             worksheet = pandas.read_excel(request.FILES['WHOM'], sheet_name=0)
-            Keys= CreateDict(worksheet)
-            
-                
-            for i in worksheet.index:
+            MailData = CreateData(worksheet)
+            for mail in MailData:
                 msg = MIMEMultipart()
                 msg['From'] = LOGIN
-                msg['To'] = worksheet['Email'][i]
+                msg['To'] = mail
                 msg['Subject'] = THEME
                 Text = MESSAGE
-                for param in Keys:
-                    Text=Text.replace('{{ ' + param + ' }}', worksheet[param][i])
+                for param in MailData[mail]:
+                    Text=Text.replace('{{ ' + param + ' }}', MailData[mail][param])
                 msg.attach(MIMEText(Text))
-                if 'ATTACH_TPL' in request.FILES:
-                    
+                if 'ATTACH_TPL' in request.FILES: 
                     tpl = DocxTemplate(request.FILES['ATTACH_TPL'])
-                    context2 = {param : worksheet[param][i] for param in Keys}
+                    context2 = {param : MailData[mail][param] for param in MailData[mail]}
                     tpl.render(context2)
                     tpl.save('Letter.docx')
                     attachment = 'Letter.docx'
@@ -66,14 +62,14 @@ def sender(request):
                     attachFile.set_payload(fo.read())
                     fo.close()
                     encoders.encode_base64(attachFile)
-                    FileName = request.FILES['ATTACH_TPL'].name.split('.')[0]  + '_To_' + worksheet['Email'][i].split('@')[0] + '.docx'
+                    FileName = request.FILES['ATTACH_TPL'].name.split('.')[0]  + '_To_' + mail.split('@')[0] + '.docx'
                     attachFile.add_header('Content-Disposition', 'attachment', filename=FileName)
                     msg.attach(attachFile)
 
                 server = smtplib.SMTP(MAIL_SERVER)  
                 server.starttls()  
                 server.login(LOGIN, PWD)
-                server.sendmail(LOGIN, worksheet['Email'][i] , msg.as_string())
+                server.sendmail(LOGIN, mail , msg.as_string())
                 server.quit()
                 time.sleep(3)
     else:
