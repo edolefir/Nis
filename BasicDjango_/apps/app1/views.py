@@ -14,6 +14,7 @@ from .functions import CreateData
 from .forms import SenderForm
 import xlrd
 import time
+import logging
 
 from docxtpl import DocxTemplate
 
@@ -24,7 +25,10 @@ def toUTF8(value):
 		return value
 	return str(value)
 
+logger=logging.getLogger('django.sender')
+
 def sender(request):
+    
     submitbutton= request.POST.get("submit")
     if request.method == 'POST':
         form = SenderForm(request.POST, request.FILES)
@@ -69,6 +73,7 @@ def sender(request):
                 server = smtplib.SMTP(MAIL_SERVER)  
                 server.starttls()  
                 server.login(LOGIN, PWD)
+                logger.info('Успешно введено')
                 server.sendmail(LOGIN, mail , msg.as_string())
                 server.quit()
                 time.sleep(3)

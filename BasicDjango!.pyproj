@@ -55,7 +55,9 @@
     <Compile Include="BasicDjango_\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BasicDjango_\apps\app1\templates\app1\JavaScript.js" />
     <Content Include="BasicDjango_\apps\app1\templates\app1\list.html" />
+    <Content Include="BasicDjango_\apps\app1\templates\app1\Stylesheet1.css" />
     <Content Include="BasicDjango_\apps\app1\templates\base.html" />
     <Content Include="Tests\Doc.docx" />
     <Content Include="Tests\emails.xlsx" />
