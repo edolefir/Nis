@@ -1,0 +1,129 @@
+body {
+    background: url('images/back.jpg') no-repeat;
+}
+
+
+#a1 {
+    background-color: rgb(202,205,224);
+    width: 40%;
+    border: solid 25px rgb(69,82,108);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+}
+
+#title {
+    margin-left: 3%;
+    font-family: Calibri;
+}
+
+#email {
+    text-align: left;
+    margin: 3%;
+    font-size: 14pt;
+    font-family: Calibri;
+}
+
+#id_LOGIN {
+    text-align: left;
+    margin-left: 3%;
+    padding: 3px;
+}
+
+#password {
+    text-align: left;
+    margin: 3%;
+    font-size: 14pt;
+    font-family: Calibri;
+}
+
+#id_PWD {
+    text-align: left;
+    padding: 3px;
+}
+
+#theme {
+    text-align: left;
+    margin: 3%;
+    font-size: 14pt;
+    font-family: Calibri;
+}
+
+#id_THEME {
+    padding: 5px;
+    width: 100%;
+}
+
+#letter {
+    text-align: left;
+    margin: 3%;
+    font-size: 14pt;
+    font-family: Calibri;
+}
+
+#letter1 {
+    background-color: white;
+}
+
+#id_LETTER {
+    resize: none;
+    width: 100%;
+    padding: 5px;
+    overflow: visible !important;
+    background-color: white;
+}
+
+#excel {
+    text-align: right;
+    margin-top: 15%;
+    margin-right: 3%;
+    margin-bottom: 3%;
+    font-size: 14pt;
+    font-family: Calibri;
+}
+
+#id_WHOM {
+    background-color: rgb(158, 176, 200);
+    border: 1px solid black;
+    color: black;
+    padding: 2px 2px;
+    text-align: center;
+    font-size: 14px;
+    font-family: Calibri;
+    
+}
+
+#word {
+    text-align: right;
+    margin: 3%;
+    font-size: 14pt;
+    font-family: Calibri;
+}
+
+#id_ATTACH_TPL {
+    background-color: rgb(158, 176, 200);
+    border: 1px solid black;
+    color: black;
+    padding: 2px 2px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    font-family: Calibri;
+}
+
+#button1 {
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: Calibri;
+}
+
+#button {
+    background-color: rgb(158, 176, 200);
+    border: 1px solid black;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Calibri;
+}

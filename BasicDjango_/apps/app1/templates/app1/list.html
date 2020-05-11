@@ -1,43 +1,71 @@
-﻿{% extends 'base.html' %}
-{% block content%}
-  <form action = "" enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-<div class="SenderForm">
-    {{ form.LOGIN.errors}}
-    <label for="{{ form.LOGIN.id_for_label}}">Email:</label>
-    {{ form.LOGIN }}
-</div>
-<div class="SenderForm">
-    {{ form.PWD.errors}}
-    <label for="{{ form.PWD.id_for_label}}">Пароль:</label>
-    {{ form.PWD }}
-</div>
-<div class="SenderForm">
-    {{ form.WHOM.errors}}
-    <label for="{{ form.WHOM.id_for_label}}">Файл в формате .xlsx:</label>
-    {{ form.WHOM }}
-</div>
-<div class="SenderForm">
-    {{ form.ATTACH_TPL.errors}}
-    <label for="{{ form.ATTACH_TPL.id_for_label}}">Файл в формате .docx:</label>
-    {{ form.ATTACH_TPL }}
-</div>
-<div class="SenderForm">
-    {{ form.THEME.errors}}
-    <label for="{{ form.THEME.id_for_label}}">Тема:</label>
-    {{ form.THEME }}
-</div>
-<div class="SenderForm">
-    {{ form.LETTER.errors}}
-    <label for="{{ form.LETTER.id_for_label}}">Письмо:</label>
-    {{ form.LETTER }}
-</div>
-   <button name = "submit" type="submit" value="Sended">Отправить</button>
-  </form>
+﻿<!DOCTYPE html>
+<html lang="en">
 
-{% if submitbutton == "Sended" %}
-<h1>Сообщение отправлено!</h1>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'app1/Stylesheet1.css' %}">
+    <title>Сервис массовой рассылки</title>
+</head>
 
-{% endif %}
-{% endblock%}
+<body>
+    
+    
+    <div id="a1"> 
+        <form action = "" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <h1 id="title">Сервис массовой рассылки писем</h1>   
+        <div class="SenderForm" id="email" >
+            
+            <label for="id_LOGIN">Email:</label>
+            <input type="email" placeholder="example@miem.hse.ru" id="id_LOGIN" >
+        </div>
+        <div class="SenderForm" id="password">
+            
+            <label for="id_PWD">Пароль:</label>
+            <input type="password" id="id_PWD">
+        </div>
+        <div class="SenderForm" id="theme">
+            
+            <label for="id_THEME">Тема:</label>
+            <input type="text" id="id_THEME">
+        </div>
+        <div class="SenderForm" id="letter">
+            <div id="menu"></div>
+            <div id="sample">
+            <script src={% static 'app1/JavaScript.js' %} type="text/javascript"></script>
+            <script type="text/javascript">
+            bkLib.onDomLoaded(function() {
+            
+            new nicEditor({fullPanel : true}).panelInstance('id_LETTER');
+            
+             });
+            </script>
+            <label for="id_LETTER">Письмо:</label>
+            <div id="letter1">
+            <textarea name="" id='id_LETTER' cols="80" rows="10" ></textarea>
+            </div>
+            </div>
+        </div>
+        <div class="SenderForm" id="excel">
+        
+            <label for="id_WHOM">Файл в формате .xlsx:</label>
+            <input type="file" id="id_WHOM">
+        </div>
+        <div class="SenderForm" id="word">
+            
+            <label for="id_ATTACH_TPL">Файл в формате .docx:</label>
+            <input type="file" id="id_ATTACH_TPL">
+        </div>
+        <div id="button1">
+        <button id="button" name = "submit" type="submit" value="Sended" >Отправить</button>
+        </div>
+        </form>
+        </div>    
+    
+
+    
+    
+   
+</body>
+</html>
