@@ -73,7 +73,7 @@ def sender(request):
                     Text = MESSAGE
                     for param in MailData[mail]:
                         Text=Text.replace('{{ ' + param + ' }}', MailData[mail][param])
-                    msg.attach(MIMEText(Text))
+                    msg.attach(MIMEText(Text, "html"))
                     if 'ATTACH_TPL' in request.FILES: 
                         context2 = {param : MailData[mail][param] for param in MailData[mail]}
                         tpl.render(context2)

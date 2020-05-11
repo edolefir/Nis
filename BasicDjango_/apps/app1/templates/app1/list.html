@@ -16,19 +16,19 @@
         {% csrf_token %}
         <h1 id="title">Сервис массовой рассылки писем</h1>   
         <div class="SenderForm" id="email" >
-            
+
             <label for="id_LOGIN">Email:</label>
-            <input type="email" placeholder="example@miem.hse.ru" id="id_LOGIN" >
+            {{ form.LOGIN }}
         </div>
         <div class="SenderForm" id="password">
             
             <label for="id_PWD">Пароль:</label>
-            <input type="password" id="id_PWD">
+            {{ form.PWD }}
         </div>
         <div class="SenderForm" id="theme">
             
             <label for="id_THEME">Тема:</label>
-            <input type="text" id="id_THEME">
+            {{ form.THEME }}
         </div>
         <div class="SenderForm" id="letter">
             <div id="menu"></div>
@@ -43,19 +43,19 @@
             </script>
             <label for="id_LETTER">Письмо:</label>
             <div id="letter1">
-            <textarea name="" id='id_LETTER' cols="80" rows="10" ></textarea>
+            <textarea name="LETTER" id='id_LETTER' cols="80" rows="10" ></textarea>
             </div>
             </div>
         </div>
         <div class="SenderForm" id="excel">
         
             <label for="id_WHOM">Файл в формате .xlsx:</label>
-            <input type="file" id="id_WHOM">
+            {{ form.WHOM }}
         </div>
         <div class="SenderForm" id="word">
             
             <label for="id_ATTACH_TPL">Файл в формате .docx:</label>
-            <input type="file" id="id_ATTACH_TPL">
+            {{ form.ATTACH_TPL }}
         </div>
         <div id="button1">
         <button id="button" name = "submit" type="submit" value="Sended" >Отправить</button>
