@@ -9,7 +9,17 @@
 </head>
 
 <body>
-    
+    <div id="instruction">
+        <h3>Инструкция:</h3>
+        <br>1) Индивидуальное письмо оформляется по указанному шаблону
+        <img src={% static "app1/images/extext.png" %} width="300px">
+        <br>
+        <br>2) Прикрепите таблицу адресатов по указанному шаблону в формате .xlsx
+        <img src={% static "app1/images/extable.png" %} width="300px">
+        <br>
+        <br>3) Прикрепите (если необходимо) вложение для письма в формате .docx по шаблону (см. пункт 1)
+        
+    </div>  
     
     <div id="a1"> 
         <form action = "" enctype="multipart/form-data" method="POST">
@@ -43,7 +53,7 @@
             </script>
             <label for="id_LETTER">Письмо:</label>
             <div id="letter1">
-            <textarea name="LETTER" id='id_LETTER' cols="80" rows="10" ></textarea>
+            <textarea name="LETTER" id='id_LETTER' rows="10" ></textarea>
             </div>
             </div>
         </div>
@@ -61,11 +71,9 @@
         <button id="button" name = "submit" type="submit" value="Sended" >Отправить</button>
         </div>
         </form>
-        </div>    
-    
-
-    
-    
-   
+        {% if submitbutton == "Sended" %}
+        <h3>{{resultstr}}</h3>
+        {% endif %}
+        </div>       
 </body>
 </html>

@@ -127,3 +127,16 @@ body {
     font-size: 16px;
     font-family: Calibri;
 }
+
+#instruction {
+    background-color: rgb(202,205,224);
+    width: 20%;
+    margin-right: 3%;
+    height: 50%;
+    position: relative;
+    float: right;
+    border: solid 15px rgb(69,82,108);
+    font-size: 14pt;
+    font-family: Calibri;
+    padding: 3px;
+}

@@ -57,8 +57,10 @@
   <ItemGroup>
     <Content Include="BasicDjango_\apps\app1\static\app1\images\back.jpg" />
     <Content Include="BasicDjango_\apps\app1\static\app1\JavaScript.js" />
-    <Content Include="BasicDjango_\apps\app1\templates\app1\list.html" />
+    <Content Include="BasicDjango_\apps\app1\static\app1\images\extable.png" />
+    <Content Include="BasicDjango_\apps\app1\static\app1\images\extext.png" />
     <Content Include="BasicDjango_\apps\app1\static\app1\images\nicEditorIcons.gif" />
+    <Content Include="BasicDjango_\apps\app1\templates\app1\list.html" />
     <Content Include="BasicDjango_\apps\app1\static\app1\Stylesheet1.css" />
     <Content Include="BasicDjango_\apps\app1\templates\base.html" />
     <Content Include="Tests\Doc.docx" />
