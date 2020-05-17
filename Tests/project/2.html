@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="1.css">
+    <title>Document</title>
+</head>
+
+<body>  
+    <div id="instruction">
+        <h3>Инструкция:</h3>
+        <br>1) Индивидуальное письмо оформляется по указанному шаблону
+        <img src="extext.png" width="300px">
+        <br>
+        <br>2) Прикрепите таблицу адресатов по указанному шаблону в формате .xlsx
+        <img src="extable.png" width="300px">
+        <br>
+        <br>3) Прикрепите (если необходимо) вложение для письма в формате .docx по шаблону (см. пункт 1)
+        
+    </div>  
+    <div id="a1"> 
+        <form action = "" enctype="multipart/form-data" method="POST">
+        <h1 id="title">Сервис массовой рассылки писем</h1>   
+        <div class="SenderForm" id="email" >
+            
+            <label for="{{ form.LOGIN.id_for_label}}">Email:</label>
+            <input type="email" placeholder="example@miem.hse.ru"id="email1">
+        </div>
+        <div class="SenderForm" id="password">
+            
+            <label for="{{ form.PWD.id_for_label}}">Пароль:</label>
+            <input type="password" id="password1">
+        </div>
+        <div class="SenderForm" id="theme">
+            
+            <label for="{{ form.THEME.id_for_label}}">Тема:</label>
+            <input type="text" id="theme1">
+        </div>
+        <div class="SenderForm" id="letter">
+            <div id="menu"></div>
+            <div id="sample">
+            <script src="nicEdit.js" type="text/javascript"></script>
+            <script type="text/javascript">
+            bkLib.onDomLoaded(function() {
+            
+            new nicEditor({fullPanel : true}).panelInstance('area2');
+            
+             });
+            </script>
+            <label for="{{ form.LETTER.id_for_label}}">Письмо:</label>
+            <div id="letter1">
+            <textarea name="" id='area2' cols="80" rows="10" ></textarea>
+            </div>
+            </div>
+        </div>
+        <div class="SenderForm" id="excel">
+        
+            <label for="{{ form.WHOM.id_for_label}}">Файл в формате .xlsx:</label>
+            <input type="file" id="excel1">
+        </div>
+        <div class="SenderForm" id="word">
+            
+            <label for="{{ form.ATTACH_TPL.id_for_label}}">Файл в формате .docx:</label>
+            <input type="file" id="word1">
+        </div>
+        <div id="button1">
+        <button id="button" name = "submit" type="submit" value="Sended" >Отправить</button>
+        </form>
+    </div>    
+     
+   
+</body>
+
+</html>

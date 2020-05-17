@@ -22,25 +22,29 @@
     </div>  
     
     <div id="a1"> 
-        <button onclick="Instruct()">Показать инструкцию</button>
+        
+        <form action = "" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <h1 id="title">Сервис массовой рассылки писем</h1>   
+        
+        <div class="SenderForm" id="email" >
+           <label for="id_LOGIN">Email:</label>
+            {{ form.LOGIN }}
+            </div>
+            <div>
+        <div class="SenderForm" id="password">
+            <label for="id_PWD">Пароль:</label>
+            {{ form.PWD }}
+            <div id="button2">  
+        <button id="button" onclick="Instruct()">Показать инструкцию</button>
         <script>
             function Instruct() {
                 document.getElementById("instruction").classList.toggle("hide");
             }
         </script>
-        <form action = "" enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        <h1 id="title">Сервис массовой рассылки писем</h1>   
-        <div class="SenderForm" id="email" >
-
-            <label for="id_LOGIN">Email:</label>
-            {{ form.LOGIN }}
         </div>
-        <div class="SenderForm" id="password">
-            
-            <label for="id_PWD">Пароль:</label>
-            {{ form.PWD }}
         </div>
+            </div>
         <div class="SenderForm" id="theme">
             
             <label for="id_THEME">Тема:</label>
@@ -79,14 +83,14 @@
         </form>
         {% if submitbutton == "Sended" %}
         {% if failedEmails|length > 0 %}
-        <h1>Все сообщения отправлены, кроме:</h1>
+        <h1 id="str">Все сообщения отправлены, кроме:</h1>
         <ol>
         {% for email in failedEmails %}
-            <li>{{ email }}</li>
+            <li id="str1">{{ email }}</li>
         {% endfor %}
         </ol>
         {% else %}
-        <h1>{{ resultstr }}</h1>
+        <h1 id="str">{{ resultstr }}</h1>
         {% endif %}
         {% endif %}
         </div>       

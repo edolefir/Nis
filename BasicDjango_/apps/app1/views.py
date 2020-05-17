@@ -112,7 +112,7 @@ def sender(request):
                             server = smtplib.SMTP(MAIL_SERVER)
                         except smtplib.socket.gaierror:
                             logger.warning("Не удалось соединиться с сервером. Письмо для " + mail + " не удалось отправить.")
-                            failedEmails.append(mail + '-' + 'Не удалось соединиться с сервером.')
+                            failedEmails.append(mail + '-' + 'не удалось соединиться с сервером.')
                         else:
                             try:
                                 server.starttls()  
@@ -120,10 +120,10 @@ def sender(request):
                                 server.sendmail(LOGIN, mail , msg.as_string())
                             except smtplib.SMTPServerDisconnected:
                                 logger.warning("Разрыв соединения - письмо для " + mail + " не удалось отправить.")
-                                failedEmails.append(mail + '-' + 'Разрыв соединения.')
+                                failedEmails.append(mail + '-' + 'разрыв соединения.')
                             except smtplib.SMTPRecipientsRefused:
                                 logger.warning("Неверный адресат - письмо для " + mail + " не удалось отправить.")
-                                failedEmails.append(mail + '-' + 'Неверный адресат.')
+                                failedEmails.append(mail + '-' + 'неверный адресат.')
                             else:
                                 logger.info("Письмо для " + mail + " отправлено.")
                                 try:
