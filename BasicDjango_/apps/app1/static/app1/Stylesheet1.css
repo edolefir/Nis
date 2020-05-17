@@ -140,3 +140,7 @@ body {
     font-family: Calibri;
     padding: 3px;
 }
+
+.hide {
+    display: none;
+}

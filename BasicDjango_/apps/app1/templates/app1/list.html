@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="instruction">
+    <div id="instruction" class="hide">
         <h3>Инструкция:</h3>
         <br>1) Индивидуальное письмо оформляется по указанному шаблону
         <img src={% static "app1/images/extext.png" %} width="300px">
@@ -22,6 +22,12 @@
     </div>  
     
     <div id="a1"> 
+        <button onclick="Instruct()">Показать инструкцию</button>
+        <script>
+            function Instruct() {
+                document.getElementById("instruction").classList.toggle("hide");
+            }
+        </script>
         <form action = "" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         <h1 id="title">Сервис массовой рассылки писем</h1>   
@@ -72,7 +78,16 @@
         </div>
         </form>
         {% if submitbutton == "Sended" %}
-        <h3>{{resultstr}}</h3>
+        {% if failedEmails|length > 0 %}
+        <h1>Все сообщения отправлены, кроме:</h1>
+        <ol>
+        {% for email in failedEmails %}
+            <li>{{ email }}</li>
+        {% endfor %}
+        </ol>
+        {% else %}
+        <h1>{{ resultstr }}</h1>
+        {% endif %}
         {% endif %}
         </div>       
 </body>

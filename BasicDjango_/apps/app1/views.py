@@ -29,6 +29,8 @@ logger=logging.getLogger('django.sender')
 
 def sender(request):
     resultstr=''
+    isError = False
+    failedEmails = []
     logger.info("Запуск страницы.")
     submitbutton= request.POST.get("submit")
     if request.method == 'POST':
@@ -55,15 +57,25 @@ def sender(request):
                     server.login(LOGIN, PWD)
                     server.quit()
                 except xlrd.biffh.XLRDError:
-                    log.warning('Неверный формат файла таблицы - работа программы невозможна.')
+                    isError = True
+                    resultstr = 'Неверный формат файла таблицы - работа программы невозможна.'
+                    logger.warning(resultstr)
                 except ValueError or docx.opc.exceptions.PackageNotFoundError:
-                    log.warning('Неверный формат файла шаблона - работа программы невозможна.')
+                    isError = True
+                    resultstr = 'Неверный формат файла шаблона - работа программы невозможна.'
+                    logger.warning(resultstr)
                 except smtplib.socket.gaierror:
-                    logger.warning("Не удалось соединиться с сервером.")
+                    isError = True
+                    resultstr = "Не удалось соединиться с сервером."
+                    logger.warning(resultstr)
                 except smtplib.SMTPServerDisconnected:
-                    logger.warning("Разрыв соединения.")
+                    isError = True
+                    resultstr = "Разрыв соединения."
+                    logger.warning(resultstr)
                 except smtplib.SMTPAuthenticationError:
-                    logger.warning("Неверный логин и пароль.")
+                    isError = True
+                    resultstr = "Неверный логин и пароль."
+                    logger.warning(resultstr)
                 else:
                     logger.info('Все данные введены правильно. Вход прошел успешно. Таблица считана.')
                     MailData = CreateData(worksheet)
@@ -100,6 +112,7 @@ def sender(request):
                             server = smtplib.SMTP(MAIL_SERVER)
                         except smtplib.socket.gaierror:
                             logger.warning("Не удалось соединиться с сервером. Письмо для " + mail + " не удалось отправить.")
+                            failedEmails.append(mail + '-' + 'Не удалось соединиться с сервером.')
                         else:
                             try:
                                 server.starttls()  
@@ -107,8 +120,10 @@ def sender(request):
                                 server.sendmail(LOGIN, mail , msg.as_string())
                             except smtplib.SMTPServerDisconnected:
                                 logger.warning("Разрыв соединения - письмо для " + mail + " не удалось отправить.")
+                                failedEmails.append(mail + '-' + 'Разрыв соединения.')
                             except smtplib.SMTPRecipientsRefused:
                                 logger.warning("Неверный адресат - письмо для " + mail + " не удалось отправить.")
+                                failedEmails.append(mail + '-' + 'Неверный адресат.')
                             else:
                                 logger.info("Письмо для " + mail + " отправлено.")
                                 try:
@@ -117,12 +132,13 @@ def sender(request):
                                     logger.warning("Разрыв соединения.")
                         time.sleep(3)
                     logger.info("Программа закончила свою работу.")
-            except exception as e: 
+            except Exception as e: 
                 resultstr='Ошибка: ' + str(e)
-            else: 
-                resultstr='Сообщения отправлены'
+            else:
+                if not(isError):
+                    resultstr = 'Сообщения отправлены'
     else:
         form = SenderForm()
-    context= {'form': form, 'submitbutton': submitbutton, 'resultstr':resultstr}
+    context= {'form': form, 'submitbutton': submitbutton, 'resultstr':resultstr, 'failedEmails': failedEmails}
     logger.info("Рендеринг страницы.")
     return render(request, 'app1/list.html', context)
