@@ -81,13 +81,7 @@ def sender(request):
                             tpl.render(context2)
                             tpl.save('Letter.docx')
                             attachment = 'Letter.docx'
-                            if attachment.find('doc') > 0:
-                                attachFile = MIMEBase('application', 'msword')
-                            elif attachment.find('pdf') > 0:
-                                attachFile = MIMEBase('application', 'pdf')
-                            else:
-                                attachFile = MIMEBase('application', 'octet-stream')
-                            
+                            attachFile = MIMEBase('application', 'msword')
                             fo = open('Letter.docx', 'rb')
                             attachFile.set_payload(fo.read())
                             fo.close()
