@@ -1,10 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 import pandas
-
-
 import smtplib
-
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -15,15 +11,7 @@ from .forms import SenderForm
 import xlrd
 import time
 import logging
-
 from docxtpl import DocxTemplate
-
-def toUTF8(value):
-	if type(value) == unicode:
-		return value.encode('utf-8')
-	if type(value) == str:
-		return value
-	return str(value)
 
 logger=logging.getLogger('django.sender')
 
