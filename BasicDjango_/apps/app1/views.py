@@ -74,10 +74,10 @@ def sender(request):
                         msg['Subject'] = THEME
                         Text = MESSAGE
                         for param in MailData[mail]:
-                            Text=Text.replace('{{ ' + param + ' }}', MailData[mail][param])
+                            Text=Text.replace('{{ ' + param + ' }}', str(MailData[mail][param]))
                         msg.attach(MIMEText(Text, "html"))
                         if 'ATTACH_TPL' in request.FILES: 
-                            context2 = {param : MailData[mail][param] for param in MailData[mail]}
+                            context2 = {param : str(MailData[mail][param]) for param in MailData[mail]}
                             tpl.render(context2)
                             tpl.save('Letter.docx')
                             attachment = 'Letter.docx'
