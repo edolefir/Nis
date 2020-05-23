@@ -77,6 +77,7 @@ def sender(request):
                             Text=Text.replace('{{ ' + param + ' }}', str(MailData[mail][param]))
                         msg.attach(MIMEText(Text, "html"))
                         if 'ATTACH_TPL' in request.FILES: 
+                            tpl = DocxTemplate(request.FILES['ATTACH_TPL'])
                             context2 = {param : str(MailData[mail][param]) for param in MailData[mail]}
                             tpl.render(context2)
                             tpl.save('Letter.docx')
