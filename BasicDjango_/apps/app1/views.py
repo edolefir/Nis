@@ -14,6 +14,12 @@ import logging
 from docxtpl import DocxTemplate
 
 logger=logging.getLogger('django.sender')
+MAIL_SERVERS = {'gmail.com': 'smtp.gmail.com:465',
+                'miem.hse.ru': 'smtp.gmail.com:465',
+                'mail.ru': 'smtp.mail.ru:465',
+                'hse.ru': 'smtpnnov.hse.ru:587',
+                'yandex.ru': 'smtp.yandex.ru:465',
+                'rambler.ru': 'smtp.rambler.ru:465'}
 
 def sender(request):
     resultstr=''
@@ -30,7 +36,7 @@ def sender(request):
                 PWD = form.cleaned_data.get('PWD')
                 MESSAGE = form.cleaned_data.get('LETTER')
                 THEME = form.cleaned_data.get('THEME')
-                MAIL_SERVER = 'smtp.gmail.com:587'
+                MAIL_SERVER = MAIL_SERVERS[LOGIN.split('@')[1]]
                 try:
                     logger.info('Cчитывание таблицы...')
                     worksheet = pandas.read_excel(request.FILES['WHOM'], sheet_name=0)
@@ -40,8 +46,7 @@ def sender(request):
                     else:
                         logger.info('Файл шаблона не приклеплён к форме.')
                     logger.info('Проверка соединения...')
-                    server = smtplib.SMTP(MAIL_SERVER)
-                    server.starttls()  
+                    server = smtplib.SMTP_SSL(MAIL_SERVER)
                     server.login(LOGIN, PWD)
                     server.quit()
                 except xlrd.biffh.XLRDError:
@@ -92,13 +97,12 @@ def sender(request):
                             msg.attach(attachFile)
                             logger.info("Файл для " + mail + " сформирован и приклеплен")
                         try:
-                            server = smtplib.SMTP(MAIL_SERVER)
+                            server = smtplib.SMTP_SSL(MAIL_SERVER)
                         except smtplib.socket.gaierror:
                             logger.warning("Не удалось соединиться с сервером. Письмо для " + mail + " не удалось отправить.")
                             failedEmails.append(mail + '-' + 'не удалось соединиться с сервером.')
                         else:
                             try:
-                                server.starttls()  
                                 server.login(LOGIN, PWD)
                                 server.sendmail(LOGIN, mail , msg.as_string())
                             except smtplib.SMTPServerDisconnected:
