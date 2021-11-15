@@ -6,7 +6,7 @@ lxml==4.5.1
 MarkupSafe==1.1.1
 numpy==1.18.4
 pandas==1.0.3
-pip==20.1.1
+pip==21.1
 python-dateutil==2.8.1
 python-docx==0.8.10
 pytz==2020.1
